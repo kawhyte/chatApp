@@ -11,3 +11,4 @@ const server = app.listen(4000,()=>{
 //Static Files
 
 
+app.use(express.static("public"))
