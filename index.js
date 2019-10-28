@@ -17,4 +17,10 @@ const io = socket(server);
 
 io.on('connection', (socket)=>{
     console.log("socket.io connection",socket.id)
+
+    socket.on('chat', (data)=>{
+        console.log(data)
+io.sockets.emit('chat', data)
+
+    })
 })

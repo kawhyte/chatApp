@@ -1,9 +1,26 @@
 //Make connection
 
-const client_socket = io.connect("http://localhost:4000/");
+const socket = io.connect("http://localhost:4000/");
 
 // Query DOM
-var message = document.getElementById('message'),
-      handle = document.getElementById('handle'),
-      btn = document.getElementById('send'),
-      output = document.getElementById('output');
+const message = document.getElementById("message"),
+  handle = document.getElementById("handle"),
+  btn = document.getElementById("send"),
+  output = document.getElementById("output");
+
+//Emit Event
+btn.addEventListener("click", (e) => {
+
+  console.log(e);
+  socket.emit("chat", {
+    message: message.value,
+    handle: handle.value
+  });
+  message.value ="";
+});
+
+//Listen for events
+socket.on('chat', (data)=>{
+  
+      output.innerHTML += '<p><strong>' + data.handle + ': </strong>' + data.message + '</p>';
+})
