@@ -1,4 +1,6 @@
-//Make connection
+const items =[];
+
+//Make connection to auction 
 
 const socket = io.connect("http://localhost:4000/");
 
@@ -17,6 +19,7 @@ btn.addEventListener("click", (e) => {
     message: message.value,
     handle: handle.value
   });
+  
   message.value ="";
 });
 
@@ -28,6 +31,10 @@ message.addEventListener('keypress', ()=> {
 socket.on('chat', (data)=>{
   feedback.innerHTML = '';
       output.innerHTML += '<p><strong>' + data.handle + ': </strong>' + data.message + '</p>';
+
+      items.push(data);
+  console.log('These are the items:'+ items)
+  localStorage.setItem('messages',JSON.stringify(items))
 })
 
 socket.on('typing', function(data){

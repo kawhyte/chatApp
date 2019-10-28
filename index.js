@@ -1,6 +1,7 @@
 const express = require("express");
 const socket = require("socket.io");
 
+
 // App setup
 const app = express();
 
@@ -18,8 +19,11 @@ io.on("connection", socket => {
   console.log("socket.io connection", socket.id);
 
   socket.on("chat", data => {
-    console.log(data);
+    //console.log(data);
     io.sockets.emit("chat", data);
+  
+   
+
   });
 
   // Handle typing event
